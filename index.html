@@ -1,40 +1,170 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+  <title>Micro Frontends Presentation</title>
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+  <link rel="stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/black.css">
+  <link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+<body>
+  <div class="reveal">
+    <div class="slides">
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+      <section>
+        <h3>Micro Frontends</h3>
+        <span>A Modern Approach to Scalable Frontend Development</span>
+        <aside class="notes">
+          Today, I would like to introduce you to Micro Frontends — a modern solution for scaling and organizing frontend development. As applications grow in size and complexity, traditional monolithic frontend architectures create bottlenecks. Micro frontends help us manage complexity, enable faster development, and ensure stable, maintainable systems.
+        </aside>
+      </section>
+
+      <section>
+        <h3>What are Micro Frontends?</h3>
+        <ul>
+          <li>An architectural style dividing frontend into independent applications.</li>
+          <li>Each application is developed, tested, and deployed independently.</li>
+          <li>Inspired by microservices architecture.</li>
+        </ul>
+        <aside class="notes">
+          Micro frontends break a large frontend into smaller, independent applications. Each micro frontend is responsible for a specific business function and is handled independently by teams. This idea is inspired by microservices on the backend, and helps us scale teams and technologies efficiently.
+        </aside>
+      </section>
+
+      <section>
+        <h3>Why Micro Frontends?</h3>
+        <ul>
+          <li>Manage growing complexity.</li>
+          <li>Independent development and deployment.</li>
+          <li>Faster updates and better fault isolation.</li>
+        </ul>
+        <aside class="notes">
+          In traditional frontends, the codebase grows huge and complex. Every change becomes risky and slow. Micro frontends solve this by creating clear boundaries. Teams can work faster, deploy independently, and errors are isolated — meaning if one part fails, the whole system doesn't crash.
+        </aside>
+      </section>
+
+      <section>
+        <h3>How It Works</h3>
+        <ul>
+          <li>Frontend is divided into business domains.</li>
+          <li>Each micro frontend has its own repository and deployment.</li>
+          <li>Integration happens at build-time or runtime.</li>
+        </ul>
+        <aside class="notes">
+          Micro frontends divide the UI based on business functionalities. Each project has its own repository, build pipeline, and deployment process. They are combined either during build-time or dynamically during runtime to create a seamless user experience.
+        </aside>
+      </section>
+
+      <section>
+        <h3>Example: E-commerce Website</h3>
+        <ul>
+          <li>Product catalog: built with React.</li>
+          <li>Shopping cart: built with Vue.js.</li>
+          <li>User account: built with Angular.</li>
+        </ul>
+        <aside class="notes">
+          Imagine an e-commerce site. One team manages the product catalog with React, another manages the shopping cart with Vue.js, and another handles user accounts with Angular. Teams work independently, use different technologies, and update features without coordinating large releases.
+        </aside>
+      </section>
+
+      <section>
+        <h3>Integration Approaches</h3>
+        <ul>
+          <li>Build-time Integration</li>
+          <li>Runtime Integration</li>
+        </ul>
+        <aside class="notes">
+          There are two ways to integrate micro frontends. Build-time integration compiles everything together before deployment, which is simple but less flexible. Runtime integration loads micro frontends dynamically, allowing independent updates, using techniques like iframes, Web Components, or Module Federation.
+        </aside>
+      </section>
+
+      <section>
+        <h3>Key Technologies</h3>
+        <ul>
+          <li>Webpack 5 Module Federation</li>
+          <li>single-spa</li>
+          <li>Web Components</li>
+          <li>Qiankun framework</li>
+        </ul>
+        <aside class="notes">
+          Several technologies support micro frontends. Webpack 5 offers Module Federation for sharing components at runtime. single-spa orchestrates multiple micro apps. Web Components ensure cross-framework compatibility. Qiankun builds on top of single-spa to provide additional features like sandboxing and lifecycle management.
+        </aside>
+      </section>
+
+      <section>
+        <h3>Module Federation Example</h3>
+        <pre><code class="hljs javascript">
+const RemoteButton = React.lazy(() => import('app2/Button'));
+        </code></pre>
+        <aside class="notes">
+          Module Federation allows dynamic imports. For example, using React's lazy loading, you can load a remote Button component from another app, without rebuilding your main app. This adds real modularity and runtime flexibility to your system.
+        </aside>
+      </section>
+
+      <section>
+        <h3>Advantages</h3>
+        <ul>
+          <li>Team independence</li>
+          <li>Faster deployments</li>
+          <li>Technological freedom</li>
+          <li>Fault isolation</li>
+        </ul>
+        <aside class="notes">
+          Micro frontends bring many benefits: teams work independently, deployments are quicker, teams can choose their preferred technologies, and errors are isolated, so a bug in one micro frontend doesn't crash the entire application.
+        </aside>
+      </section>
+
+      <section>
+        <h3>Challenges</h3>
+        <ul>
+          <li>Infrastructure complexity</li>
+          <li>Performance optimization needed</li>
+          <li>Consistency across micro frontends</li>
+        </ul>
+        <aside class="notes">
+          However, micro frontends introduce complexity. Managing multiple projects, CI/CD pipelines, and ensuring consistent user experience requires strong discipline. Performance must be monitored to avoid loading duplicate libraries. Good communication and clear architecture are key.
+        </aside>
+      </section>
+
+      <section>
+        <h3>When to Use Micro Frontends?</h3>
+        <ul>
+          <li>Large, complex projects</li>
+          <li>Multiple independent teams</li>
+          <li>Frequent independent releases needed</li>
+        </ul>
+        <aside class="notes">
+          Micro frontends are ideal for large, enterprise projects with many teams and frequent independent releases. For small or simple applications, the added complexity often isn't worth it. Always assess based on project size, team structure, and long-term goals.
+        </aside>
+      </section>
+
+      <section>
+        <h3>Conclusion</h3>
+        <span>Micro frontends bring modularity, autonomy, and scalability to frontend development.</span>
+        <aside class="notes">
+          In conclusion, micro frontends help build resilient, flexible frontend systems. They improve team autonomy, scalability, and speed. But success depends on careful planning, architectural discipline, and clear team collaboration. Thank you for listening!
+        </aside>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="dist/reveal.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+  </script>
+</body>
+
 </html>
