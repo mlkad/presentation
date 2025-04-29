@@ -4,9 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
   <title>Micro Frontends Presentation</title>
-
   <link rel="stylesheet" href="dist/reset.css">
   <link rel="stylesheet" href="dist/reveal.css">
   <link rel="stylesheet" href="dist/theme/black.css">
@@ -21,7 +19,12 @@
         <h3>Micro Frontends</h3>
         <span>A Modern Approach to Scalable Frontend Development</span>
         <aside class="notes">
-          Today, I would like to introduce you to Micro Frontends — a modern solution for scaling and organizing frontend development. As applications grow in size and complexity, traditional monolithic frontend architectures create bottlenecks. Micro frontends help us manage complexity, enable faster development, and ensure stable, maintainable systems.
+          Today, I would like to introduce you to Micro Frontends — a modern solution for scaling and organizing
+          frontend development.
+          As applications grow in size and complexity, traditional monolithic frontend architectures start to create
+          bottlenecks: long build times, difficulties with scaling teams, and risks when making even small changes.
+          Micro frontends bring the idea of modularization from backend microservices into the frontend world, helping
+          us to better manage complexity, enable faster development, and ensure more stable and maintainable systems.
         </aside>
       </section>
 
@@ -33,7 +36,10 @@
           <li>Inspired by microservices architecture.</li>
         </ul>
         <aside class="notes">
-          Micro frontends break a large frontend into smaller, independent applications. Each micro frontend is responsible for a specific business function and is handled independently by teams. This idea is inspired by microservices on the backend, and helps us scale teams and technologies efficiently.
+          Micro frontends are an architectural style where a large frontend application is broken down into smaller, independent applications.
+          Each micro frontend is responsible for a specific business function or feature area and is developed, tested, and deployed independently.
+          Different teams can own different micro frontends and work on them autonomously, making their own decisions about technology, release schedules, and processes.
+          This approach is directly inspired by microservices on the backend, where each service handles one clearly defined responsibility.
         </aside>
       </section>
 
@@ -45,7 +51,11 @@
           <li>Faster updates and better fault isolation.</li>
         </ul>
         <aside class="notes">
-          In traditional frontends, the codebase grows huge and complex. Every change becomes risky and slow. Micro frontends solve this by creating clear boundaries. Teams can work faster, deploy independently, and errors are isolated — meaning if one part fails, the whole system doesn't crash.
+          In traditional frontend development, as the application grows, the codebase becomes massive.
+          Every small change requires navigating through a complex and interconnected system, which leads to longer development times, higher risks of breaking things, and slower deployments.
+          Micro frontends address these problems by creating clear boundaries between parts of the application.
+          Teams can work independently, features can be updated and deployed separately, and the overall speed and flexibility of development increase dramatically.
+          Moreover, because each micro frontend is isolated, bugs or performance issues in one part of the application are less likely to impact the entire system.
         </aside>
       </section>
 
@@ -57,7 +67,10 @@
           <li>Integration happens at build-time or runtime.</li>
         </ul>
         <aside class="notes">
-          Micro frontends divide the UI based on business functionalities. Each project has its own repository, build pipeline, and deployment process. They are combined either during build-time or dynamically during runtime to create a seamless user experience.
+          To implement micro frontends, the user interface is divided into distinct sections — often based on business domains or functionalities.
+          Each section is developed as a separate project, with its own repository, build process, and deployment pipeline.
+          These independent applications are then integrated together to create a seamless user experience.
+          Integration can happen either at build time — when all parts are compiled together — or at runtime — where different micro frontends are loaded dynamically in the browser as needed.
         </aside>
       </section>
 
@@ -69,7 +82,12 @@
           <li>User account: built with Angular.</li>
         </ul>
         <aside class="notes">
-          Imagine an e-commerce site. One team manages the product catalog with React, another manages the shopping cart with Vue.js, and another handles user accounts with Angular. Teams work independently, use different technologies, and update features without coordinating large releases.
+          For example, imagine an e-commerce platform.
+          The product catalog could be a micro frontend built with React by one team.
+          The shopping cart could be another micro frontend, developed using Vue.js by a different team.
+          The user profile and account management section could be handled by yet another team using Angular.
+          Each team can work independently, choose the best tools for their needs, and release updates without waiting for the rest of the organization.
+          At the same time, for the end user, the site feels like one unified application
         </aside>
       </section>
 
@@ -80,7 +98,14 @@
           <li>Runtime Integration</li>
         </ul>
         <aside class="notes">
-          There are two ways to integrate micro frontends. Build-time integration compiles everything together before deployment, which is simple but less flexible. Runtime integration loads micro frontends dynamically, allowing independent updates, using techniques like iframes, Web Components, or Module Federation.
+          There are two main approaches to integrating micro frontends.
+          The first one is build-time integration.
+          In this approach, all the micro frontends are compiled and bundled together into a single application before deployment.
+          This is easier to set up but reduces flexibility because every update requires rebuilding the entire system.
+          
+          The second approach is runtime integration, where micro frontends are loaded dynamically while the application is running.
+          This allows independent deployments and updates without affecting the whole application.
+          Common techniques for runtime integration include using iframes, Web Components, or solutions like Module Federation in Webpack 5 and orchestration frameworks like single-spa.
         </aside>
       </section>
 
@@ -93,7 +118,11 @@
           <li>Qiankun framework</li>
         </ul>
         <aside class="notes">
-          Several technologies support micro frontends. Webpack 5 offers Module Federation for sharing components at runtime. single-spa orchestrates multiple micro apps. Web Components ensure cross-framework compatibility. Qiankun builds on top of single-spa to provide additional features like sandboxing and lifecycle management.
+          Several modern technologies make micro frontend architecture practical.
+          Webpack 5 introduced Module Federation, which allows different applications to share code and load components from one another at runtime.
+          single-spa is a framework designed specifically for orchestrating multiple micro frontends running together on the same page.
+          Web Components offer a standardized way to create reusable, encapsulated components that can work across different frontend frameworks.
+          Another powerful tool is Qiankun, built on top of single-spa, which simplifies runtime loading, sandboxing, and communication between micro frontends.
         </aside>
       </section>
 
@@ -103,7 +132,13 @@
 const RemoteButton = React.lazy(() => import('app2/Button'));
         </code></pre>
         <aside class="notes">
-          Module Federation allows dynamic imports. For example, using React's lazy loading, you can load a remote Button component from another app, without rebuilding your main app. This adds real modularity and runtime flexibility to your system.
+          Let's briefly look at an example of how Module Federation works.
+          Imagine you have a main application, and you want to load a button component from another application dynamically.
+          In React, this would look like:
+          
+          const RemoteButton = React.lazy(() => import('app2/Button'));
+          This way, the button component from the remote app2 is loaded only when it is needed, without having to rebuild the main application.
+          This makes the system much more modular and flexible.
         </aside>
       </section>
 
@@ -116,7 +151,11 @@ const RemoteButton = React.lazy(() => import('app2/Button'));
           <li>Fault isolation</li>
         </ul>
         <aside class="notes">
-          Micro frontends bring many benefits: teams work independently, deployments are quicker, teams can choose their preferred technologies, and errors are isolated, so a bug in one micro frontend doesn't crash the entire application.
+          The benefits of micro frontends are significant.
+          First, teams gain true independence: they can develop, test, and deploy their features without waiting for others.
+          Second, release cycles become much faster because smaller, isolated changes can be pushed without fear of breaking unrelated parts.
+          Third, different teams can choose the technologies and tools that best fit their needs, which fosters innovation.
+          Finally, micro frontends offer better fault isolation: if a particular micro frontend fails, the rest of the application remains functional, improving overall reliability.
         </aside>
       </section>
 
@@ -128,7 +167,11 @@ const RemoteButton = React.lazy(() => import('app2/Button'));
           <li>Consistency across micro frontends</li>
         </ul>
         <aside class="notes">
-          However, micro frontends introduce complexity. Managing multiple projects, CI/CD pipelines, and ensuring consistent user experience requires strong discipline. Performance must be monitored to avoid loading duplicate libraries. Good communication and clear architecture are key.
+          However, adopting micro frontends is not without challenges.
+          Managing multiple applications introduces complexity in the infrastructure: more repositories, more CI/CD pipelines, and more deployment environments.
+          Performance must be carefully monitored — if each micro frontend ships its own version of common libraries like React, bundle sizes can grow uncontrollably.
+          Maintaining a consistent design and user experience across independently developed micro frontends also requires extra effort, usually through shared design systems and strict guidelines.
+          Architectural discipline, clear boundaries, and strong communication across teams are absolutely essential for success.
         </aside>
       </section>
 
@@ -140,7 +183,10 @@ const RemoteButton = React.lazy(() => import('app2/Button'));
           <li>Frequent independent releases needed</li>
         </ul>
         <aside class="notes">
-          Micro frontends are ideal for large, enterprise projects with many teams and frequent independent releases. For small or simple applications, the added complexity often isn't worth it. Always assess based on project size, team structure, and long-term goals.
+          Micro frontends are an excellent solution for large-scale, enterprise-level applications with many independent teams working on different features.
+          They are particularly useful when parts of an application need to evolve at different speeds, or when frequent independent deployments are required.
+          However, for smaller or less complex projects, the overhead and complexity of micro frontend architecture often outweigh the benefits.
+          Choosing to adopt micro frontends should always be a strategic decision based on project size, team structure, and long-term goals.
         </aside>
       </section>
 
@@ -148,7 +194,10 @@ const RemoteButton = React.lazy(() => import('app2/Button'));
         <h3>Conclusion</h3>
         <span>Micro frontends bring modularity, autonomy, and scalability to frontend development.</span>
         <aside class="notes">
-          In conclusion, micro frontends help build resilient, flexible frontend systems. They improve team autonomy, scalability, and speed. But success depends on careful planning, architectural discipline, and clear team collaboration. Thank you for listening!
+          In conclusion, micro frontends represent a powerful evolution in frontend architecture, bringing modularity, autonomy, and scalability to frontend development.
+          They allow organizations to build more resilient and flexible applications, respond faster to market demands, and scale teams more effectively.
+          However, micro frontends also demand careful planning, strong collaboration, and a clear architectural vision to avoid introducing unnecessary complexity.
+          When applied thoughtfully, micro frontends can significantly enhance the maintainability, scalability, and success of large frontend projects.
         </aside>
       </section>
 
